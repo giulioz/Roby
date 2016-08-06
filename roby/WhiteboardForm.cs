@@ -14,5 +14,11 @@ namespace roby
         {
             InitializeComponent();
         }
+
+        private void WhiteboardForm_Load(object sender, EventArgs e)
+        {
+            this.Location = Screen.AllScreens[1].WorkingArea.Location;
+            this.Size = Screen.AllScreens[1].WorkingArea.Size;
+        }
     }
 }

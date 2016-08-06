@@ -28,9 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // WhiteboardForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(446, 397);
+            this.ControlBox = false;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Name = "WhiteboardForm";
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
+            this.Text = "Roby Whiteboard";
+            this.Load += new System.EventHandler(this.WhiteboardForm_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
