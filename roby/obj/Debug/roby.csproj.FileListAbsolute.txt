@@ -7,3 +7,5 @@ C:\Users\mailz\Roby\roby\obj\Debug\roby.WhiteboardForm.resources
 C:\Users\mailz\Roby\roby\obj\Debug\roby.csproj.GenerateResource.Cache
 C:\Users\mailz\Roby\roby\obj\Debug\roby.exe
 C:\Users\mailz\Roby\roby\obj\Debug\roby.pdb
+C:\Users\mailz\Roby\roby\obj\Debug\roby.DrawPanel.resources
+C:\Users\mailz\Roby\roby\obj\Debug\roby.Properties.Resources.resources
