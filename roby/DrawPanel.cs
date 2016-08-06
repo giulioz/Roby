@@ -24,13 +24,13 @@ namespace roby
 
         private void DrawPanel_Load(object sender, EventArgs e)
         {
-            panelGraphics = this.CreateGraphics();
+            panelGraphics = CreateGraphics();
             panelGraphics.SmoothingMode = SmoothingMode.AntiAlias;
         }
 
         protected override void OnResize(EventArgs e)
         {
-            panelGraphics = this.CreateGraphics();
+            panelGraphics = CreateGraphics();
             panelGraphics.SmoothingMode = SmoothingMode.AntiAlias;
             base.OnResize(e);
         }

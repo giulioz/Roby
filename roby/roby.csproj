@@ -21,7 +21,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
@@ -50,10 +50,10 @@
     <Compile Include="DrawPanel.Designer.cs">
       <DependentUpon>DrawPanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Include="Italian.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.resx</DependentUpon>
+      <DependentUpon>Italian.resx</DependentUpon>
     </Compile>
     <Compile Include="WhiteboardForm.cs">
       <SubType>Form</SubType>
@@ -61,7 +61,6 @@
     <Compile Include="WhiteboardForm.Designer.cs">
       <DependentUpon>WhiteboardForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Platforms.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -72,9 +71,9 @@
     <EmbeddedResource Include="DrawPanel.resx">
       <DependentUpon>DrawPanel.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Include="Italian.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <LastGenOutput>Italian.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="WhiteboardForm.resx">
       <DependentUpon>WhiteboardForm.cs</DependentUpon>
