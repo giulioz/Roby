@@ -29,7 +29,7 @@ namespace roby
             try
             {
                 if (unix)
-                    file = System.IO.File.ReadAllLines("~/.roby.conf");
+                    file = System.IO.File.ReadAllLines("/home/" + Environment.UserName + "roby.conf");
                 else
                     file = System.IO.File.ReadAllLines("roby.conf");
 
@@ -61,7 +61,7 @@ namespace roby
             string[] file = new string[] { monitorIndex.ToString(), monitor0Size.Width.ToString(), monitor0Size.Height.ToString(),
                                             monitor1Size.Width.ToString(), monitor1Size.Height.ToString(), single.ToString()};
             if (unix)
-                System.IO.File.WriteAllLines("~/.roby.conf", file);
+                System.IO.File.WriteAllLines("/home/" + Environment.UserName + "roby.conf", file);
             else
                 System.IO.File.WriteAllLines("roby.conf", file);
         }
