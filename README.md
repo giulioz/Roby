@@ -19,6 +19,10 @@ cd roby/bin/Release
 
 # Compiling and Running on windows
 Download the zip on Github, extract it, open a command prompt and type:
-```"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" Roby-master\roby.sln```
+```
+"%ProgramFiles(x86)%\MSBuild\14.0\Bin\MSBuild.exe" Roby-master\roby.sln
+```
 Then type:
-```Roby-master\roby\bin\Debug\roby.exe```.
+```
+Roby-master\roby\bin\Debug\roby.exe
+```
