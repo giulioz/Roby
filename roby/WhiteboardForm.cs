@@ -70,17 +70,17 @@ namespace roby
         private void WhiteboardForm_Load(object sender, EventArgs e)
         {
             // Form Position
-            if (Program.unix)
+            //if (Program.unix)
             {
                 this.Location = Program.monitorIndex == 0 ? Point.Empty : new Point(Program.monitor0Size.Width, 0);
                 this.Size = Program.monitorIndex == 0 ? Program.monitor0Size : Program.monitor1Size;
             }
-            else
+            /*else
             {
                 // In windows is much simpler...
                 this.Location = Screen.AllScreens[Program.monitorIndex].WorkingArea.Location;
                 this.Size = Screen.AllScreens[Program.monitorIndex].WorkingArea.Size;
-            }
+            }*/
             intro.Location = new Point(this.Width / 2 - intro.Width / 2, this.Height / 2 - intro.Width / 2);
 
             drawingPen = pen;
