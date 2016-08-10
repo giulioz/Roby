@@ -1,9 +1,0 @@
-/home/classe/Roby-master/roby/obj/Release/.NETFramework,Version=v4.0.AssemblyAttribute.cs
-/home/classe/Roby-master/roby/obj/Release/roby.DrawPanel.resources
-/home/classe/Roby-master/roby/obj/Release/roby.Italian.resources
-/home/classe/Roby-master/roby/obj/Release/roby.WhiteboardForm.resources
-/home/classe/Roby-master/roby/bin/Release/roby.exe.config
-/home/classe/Roby-master/roby/bin/Release/roby.exe.mdb
-/home/classe/Roby-master/roby/bin/Release/roby.exe
-/home/classe/Roby-master/roby/obj/Release/roby.exe
-/home/classe/Roby-master/roby/obj/Release/roby.exe.mdb
