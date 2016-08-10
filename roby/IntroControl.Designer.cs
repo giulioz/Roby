@@ -1,6 +1,6 @@
 ﻿namespace roby
 {
-    partial class DrawPanel
+    partial class IntroControl
     {
         /// <summary> 
         /// Variabile di progettazione necessaria.
@@ -28,17 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IntroControl));
             this.SuspendLayout();
             // 
-            // DrawPanel
+            // IntroControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.White;
-            this.DoubleBuffered = true;
-            this.Name = "DrawPanel";
-            this.Size = new System.Drawing.Size(491, 401);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPanel_Paint);
+            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
+            this.Name = "IntroControl";
+            this.Size = new System.Drawing.Size(471, 250);
             this.ResumeLayout(false);
 
         }

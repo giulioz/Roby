@@ -239,5 +239,23 @@ namespace roby {
                 return ResourceManager.GetString("Yellow", resourceCulture);
             }
         }
+
+		internal static string Line {
+            get {
+                return ResourceManager.GetString("Line", resourceCulture);
+            }
+        }
+
+		internal static string Rectangle {
+            get {
+                return ResourceManager.GetString("Rectangle", resourceCulture);
+            }
+        }
+
+		internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
+            }
+        }
     }
 }

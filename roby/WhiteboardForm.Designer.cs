@@ -38,6 +38,8 @@
             this.pageLabel = new System.Windows.Forms.ToolStripLabel();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.shapeButton = new System.Windows.Forms.ToolStripDropDownButton();
+            this.lineButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.rectButton = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -54,9 +56,7 @@
             this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.openButton = new System.Windows.Forms.ToolStripMenuItem();
             this.saveButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.drawPanel1 = new roby.DrawPanel();
-            this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rectangleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new DoubleBufferedPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -155,12 +155,24 @@
             // shapeButton
             // 
             this.shapeButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.lineToolStripMenuItem,
-            this.rectangleToolStripMenuItem});
+            this.lineButton,
+            this.rectButton});
             this.shapeButton.Image = ((System.Drawing.Image)(resources.GetObject("shapeButton.Image")));
             this.shapeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.shapeButton.Name = "shapeButton";
             this.shapeButton.Size = new System.Drawing.Size(45, 44);
+            // 
+            // lineButton
+            // 
+            this.lineButton.Name = "lineButton";
+            this.lineButton.Size = new System.Drawing.Size(67, 22);
+            this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
+            // 
+            // rectButton
+            // 
+            this.rectButton.Name = "rectButton";
+            this.rectButton.Size = new System.Drawing.Size(67, 22);
+            this.rectButton.Click += new System.EventHandler(this.rectButton_Click);
             // 
             // colorDropDownButton1
             // 
@@ -285,28 +297,18 @@
             this.saveButton.Text = "Save";
             this.saveButton.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
-            // drawPanel1
+            // panel1
             // 
-            this.drawPanel1.BackColor = System.Drawing.Color.White;
-            this.drawPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drawPanel1.Location = new System.Drawing.Point(0, 47);
-            this.drawPanel1.Name = "drawPanel1";
-            this.drawPanel1.Size = new System.Drawing.Size(1080, 589);
-            this.drawPanel1.TabIndex = 2;
-            // 
-            // lineToolStripMenuItem
-            // 
-            this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.lineToolStripMenuItem.Text = "Line";
-            this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
-            // 
-            // rectangleToolStripMenuItem
-            // 
-            this.rectangleToolStripMenuItem.Name = "rectangleToolStripMenuItem";
-            this.rectangleToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.rectangleToolStripMenuItem.Text = "Rectangle";
-            this.rectangleToolStripMenuItem.Click += new System.EventHandler(this.rectangleToolStripMenuItem_Click);
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel1.Location = new System.Drawing.Point(0, 47);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(1080, 589);
+            this.panel1.TabIndex = 2;
+            this.panel1.Paint += new System.Windows.Forms.PaintEventHandler(this.panel1_Paint);
+            this.panel1.MouseDown += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseDown);
+            this.panel1.MouseMove += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseMove);
+            this.panel1.MouseUp += new System.Windows.Forms.MouseEventHandler(this.panel1_MouseUp);
             // 
             // WhiteboardForm
             // 
@@ -314,11 +316,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1080, 636);
             this.ControlBox = false;
-            this.Controls.Add(this.drawPanel1);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "WhiteboardForm";
-            this.ShowIcon = false;
             this.ShowInTaskbar = false;
             this.Text = "Roby Whiteboard";
             this.Load += new System.EventHandler(this.WhiteboardForm_Load);
@@ -329,7 +330,6 @@
         }
 
         #endregion
-        private DrawPanel drawPanel1;
         private System.Windows.Forms.ToolStripButton penButton;
         private System.Windows.Forms.ToolStripButton highlButton;
         private System.Windows.Forms.ToolStripButton rubberButton;
@@ -347,6 +347,8 @@
         private System.Windows.Forms.ToolStripMenuItem magentaToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cyanToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton shapeButton;
+		private System.Windows.Forms.ToolStripMenuItem lineButton;
+		private System.Windows.Forms.ToolStripMenuItem rectButton;
         private System.Windows.Forms.ToolStripButton undoButton;
         private System.Windows.Forms.ToolStripButton redoButton;
         private System.Windows.Forms.ToolStripButton clearButton;
@@ -355,10 +357,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton fileButton;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem lineToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem rectangleToolStripMenuItem;
+        private DoubleBufferedPanel panel1;
     }
 }
 

@@ -3,9 +3,9 @@ C:\Users\mailz\Roby\roby\bin\Debug\roby.exe.config
 C:\Users\mailz\Roby\roby\bin\Debug\roby.exe
 C:\Users\mailz\Roby\roby\bin\Debug\roby.pdb
 C:\Users\mailz\Roby\roby\obj\Debug\roby.csprojResolveAssemblyReference.cache
-C:\Users\mailz\Roby\roby\obj\Debug\roby.WhiteboardForm.resources
 C:\Users\mailz\Roby\roby\obj\Debug\roby.csproj.GenerateResource.Cache
 C:\Users\mailz\Roby\roby\obj\Debug\roby.exe
 C:\Users\mailz\Roby\roby\obj\Debug\roby.pdb
-C:\Users\mailz\Roby\roby\obj\Debug\roby.DrawPanel.resources
 C:\Users\mailz\Roby\roby\obj\Debug\roby.Italian.resources
+C:\Users\mailz\Roby\roby\obj\Debug\roby.IntroControl.resources
+C:\Users\mailz\Roby\roby\obj\Debug\roby.WhiteboardForm.resources

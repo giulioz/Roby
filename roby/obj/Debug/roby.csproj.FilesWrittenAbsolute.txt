@@ -4,3 +4,11 @@
 /root/Roby/roby/bin/Debug/roby.exe.mdb
 /root/Roby/roby/bin/Debug/roby.exe
 /root/Roby/roby/obj/Debug/roby.exe.mdb
+/home/classe/Roby-master/roby/obj/Debug/.NETFramework,Version=v4.0.AssemblyAttribute.cs
+/home/classe/Roby-master/roby/obj/Debug/roby.DrawPanel.resources
+/home/classe/Roby-master/roby/obj/Debug/roby.Italian.resources
+/home/classe/Roby-master/roby/obj/Debug/roby.WhiteboardForm.resources
+/home/classe/Roby-master/roby/bin/Debug/roby.exe.mdb
+/home/classe/Roby-master/roby/bin/Debug/roby.exe
+/home/classe/Roby-master/roby/obj/Debug/roby.exe
+/home/classe/Roby-master/roby/obj/Debug/roby.exe.mdb

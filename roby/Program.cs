@@ -15,6 +15,7 @@ namespace roby
 
         public static int monitorIndex;
         public static Size monitor0Size, monitor1Size;
+		public static bool single;
 
         [STAThread]
         static void Main()
@@ -34,12 +35,14 @@ namespace roby
                 monitorIndex = int.Parse(file[0]);
                 monitor0Size = new Size(int.Parse(file[1]), int.Parse(file[2]));
                 monitor1Size = new Size(int.Parse(file[3]), int.Parse(file[4]));
+				single = bool.Parse(file[5]);
             }
             catch (Exception)
             {
                 monitorIndex = 0;
-                monitor0Size = new Size(1024, 768);
-                monitor1Size = new Size(1024, 768);
+                monitor0Size = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size;
+                monitor1Size = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size;
+				single = true;
             }
 
             locale = new ResourceManager(typeof(Italian));
