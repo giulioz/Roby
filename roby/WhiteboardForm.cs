@@ -79,6 +79,7 @@ namespace roby
 
         private void penButton_Click(object sender, EventArgs e)
         {
+            drawPanel1.mode = DrawMode.Pen;
             highlButton.Checked = false;
             rubberButton.Checked = false;
             drawPanel1.drawingPen = pen;
@@ -86,6 +87,7 @@ namespace roby
 
         private void highlButton_Click(object sender, EventArgs e)
         {
+            drawPanel1.mode = DrawMode.Pen;
             penButton.Checked = false;
             rubberButton.Checked = false;
             drawPanel1.drawingPen = highlighter;
@@ -93,6 +95,7 @@ namespace roby
 
         private void rubberButton_Click(object sender, EventArgs e)
         {
+            drawPanel1.mode = DrawMode.Pen;
             penButton.Checked = false;
             highlButton.Checked = false;
             drawPanel1.drawingPen = rubber;
@@ -179,6 +182,24 @@ namespace roby
                 st.Flush();
                 st.Close();
             }
+        }
+
+        private void lineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            drawPanel1.mode = DrawMode.Line;
+            penButton.Checked = false;
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+            drawPanel1.drawingPen = pen;
+        }
+
+        private void rectangleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            drawPanel1.mode = DrawMode.Square;
+            penButton.Checked = false;
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+            drawPanel1.drawingPen = pen;
         }
     }
 }
