@@ -34,8 +34,8 @@ namespace roby
                     highlighter = new Pen(new SolidBrush(Color.FromArgb(150, 255, 255, 0)), 30f),
                     rubber = new Pen(Color.White, 40f);
         public List<List<Tuple<List<Point>, PenInfo>>> pages;
-        public Stack<List<List<Tuple<List<Point>, PenInfo>>>> undo = new Stack<List<List<Tuple<List<Point>, PenInfo>>>>(),
-            redo = new Stack<List<List<Tuple<List<Point>, PenInfo>>>>();
+        public Stack<List<Tuple<List<Point>, PenInfo>>> undo = new Stack<List<Tuple<List<Point>, PenInfo>>>(),
+            redo = new Stack<List<Tuple<List<Point>, PenInfo>>>();
         public int selectedPage = 1;
         public Pen drawingPen;
         public DrawingMode mode;
@@ -111,7 +111,8 @@ namespace roby
             this.saveButton.Text = Program.locale.GetString("Save");
 			this.lineButton.Text = Program.locale.GetString("Line");
             this.rectButton.Text = Program.locale.GetString("Rectangle");
-			this.Text = Program.locale.GetString("Title");
+            this.settingsToolStripMenuItem.Text = Program.locale.GetString("Settings");
+            this.Text = Program.locale.GetString("Title");
             pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
         }
 
@@ -124,7 +125,7 @@ namespace roby
                 intro.Dispose();
             }
             penDown = true;
-            undo.Push(new List<List<Tuple<List<Point>, PenInfo>>>(pages));
+            undo.Push(new List<Tuple<List<Point>, PenInfo>>(pages[selectedPage - 1]));
             _currStroke = new List<Point>();
             _currStroke.Add(e.Location);
             if (mode == DrawingMode.Line) _currStroke.Add(e.Location);
@@ -196,11 +197,35 @@ namespace roby
             drawingPen = rubber;
         }
 
+        private void lineButton_Click(object sender, EventArgs e)
+        {
+            mode = DrawingMode.Line;
+            drawingPen = pen;
+            penButton.Checked = false;
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+        }
+
+        private void rectButton_Click(object sender, EventArgs e)
+        {
+            mode = DrawingMode.Rectangle;
+            drawingPen = pen;
+            penButton.Checked = false;
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+        }
+
         private void clearButton_Click(object sender, EventArgs e)
         {
-			undo.Push(new List<List<Tuple<List<Point>, PenInfo>>>(pages));
-            pages = new List<List<Tuple<List<Point>, PenInfo>>>();
-            Refresh();
+            if (MessageBox.Show(this, Program.locale.GetString("MessageSure"), "Roby",
+                MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                undo.Push(new List<Tuple<List<Point>, PenInfo>>(pages[selectedPage - 1]));
+                pages = new List<List<Tuple<List<Point>, PenInfo>>>();
+                pages.Add(new List<Tuple<List<Point>, PenInfo>>());
+                selectedPage = 1;
+                Refresh();
+            }
         }
 
         private void pforwardButton_Click(object sender, EventArgs e)
@@ -211,6 +236,8 @@ namespace roby
             }
             selectedPage++;
             pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
+            redo = new Stack<List<Tuple<List<Point>, PenInfo>>>();
+            undo = new Stack<List<Tuple<List<Point>, PenInfo>>>();
             panel1.Refresh();
         }
 
@@ -220,6 +247,8 @@ namespace roby
             {
                 selectedPage--;
                 pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
+                redo = new Stack<List<Tuple<List<Point>, PenInfo>>>();
+                undo = new Stack<List<Tuple<List<Point>, PenInfo>>>();
                 panel1.Refresh();
             }
         }
@@ -228,8 +257,8 @@ namespace roby
         {
             if (undo.Count != 0)
             {
-                redo.Push(new List<List<Tuple<List<Point>, PenInfo>>>(pages));
-                pages = undo.Pop();
+                redo.Push(new List<Tuple<List<Point>, PenInfo>>(pages[selectedPage - 1]));
+                pages[selectedPage - 1] = undo.Pop();
                 panel1.Refresh();
             }
         }
@@ -238,8 +267,8 @@ namespace roby
         {
             if (redo.Count != 0)
             {
-                undo.Push(new List<List<Tuple<List<Point>, PenInfo>>>(pages));
-                pages = redo.Pop();
+                undo.Push(new List<Tuple<List<Point>, PenInfo>>(pages[selectedPage - 1]));
+                pages[selectedPage - 1] = redo.Pop();
                 panel1.Refresh();
             }
         }
@@ -274,22 +303,9 @@ namespace roby
             }
         }
 
-		private void lineButton_Click(object sender, EventArgs e)
+        private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            mode = DrawingMode.Line;
-			drawingPen = pen;
-			penButton.Checked = false;
-            highlButton.Checked = false;
-            rubberButton.Checked = false;
-        }
-
-		private void rectButton_Click(object sender, EventArgs e)
-        {
-            mode = DrawingMode.Rectangle;
-			drawingPen = pen;
-			penButton.Checked = false;
-            highlButton.Checked = false;
-            rubberButton.Checked = false;
+            new Settings().ShowDialog(this);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
 using System.Resources;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace roby
             try
             {
                 if (unix)
-                    file = System.IO.File.ReadAllLines("/etc/roby.conf");
+                    file = System.IO.File.ReadAllLines("~/.roby.conf");
                 else
                     file = System.IO.File.ReadAllLines("roby.conf");
 
@@ -45,11 +46,24 @@ namespace roby
 				single = true;
             }
 
-            locale = new ResourceManager(typeof(Italian));
+            if (CultureInfo.InstalledUICulture.TwoLetterISOLanguageName == "it")
+                locale = new ResourceManager(typeof(Italian));
+            else
+                locale = new ResourceManager(typeof(English));
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new WhiteboardForm());
+        }
+
+        public static void SaveSettings()
+        {
+            string[] file = new string[] { monitorIndex.ToString(), monitor0Size.Width.ToString(), monitor0Size.Height.ToString(),
+                                            monitor1Size.Width.ToString(), monitor1Size.Height.ToString(), single.ToString()};
+            if (unix)
+                System.IO.File.WriteAllLines("~/.roby.conf", file);
+            else
+                System.IO.File.WriteAllLines("roby.conf", file);
         }
     }
 }

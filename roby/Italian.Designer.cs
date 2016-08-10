@@ -133,11 +133,29 @@ namespace roby {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Linea dritta.
+        /// </summary>
+        internal static string Line {
+            get {
+                return ResourceManager.GetString("Line", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Magenta.
         /// </summary>
         internal static string Magenta {
             get {
                 return ResourceManager.GetString("Magenta", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Sei sicuro di voler cancellare tutto?.
+        /// </summary>
+        internal static string MessageSure {
+            get {
+                return ResourceManager.GetString("MessageSure", resourceCulture);
             }
         }
         
@@ -178,6 +196,15 @@ namespace roby {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Rettangolo.
+        /// </summary>
+        internal static string Rectangle {
+            get {
+                return ResourceManager.GetString("Rectangle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Rosso.
         /// </summary>
         internal static string Red {
@@ -214,11 +241,29 @@ namespace roby {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Opzioni.
+        /// </summary>
+        internal static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Linee e Forme.
         /// </summary>
         internal static string Shape {
             get {
                 return ResourceManager.GetString("Shape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Lavagna Roby.
+        /// </summary>
+        internal static string Title {
+            get {
+                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
         
@@ -237,24 +282,6 @@ namespace roby {
         internal static string Yellow {
             get {
                 return ResourceManager.GetString("Yellow", resourceCulture);
-            }
-        }
-
-		internal static string Line {
-            get {
-                return ResourceManager.GetString("Line", resourceCulture);
-            }
-        }
-
-		internal static string Rectangle {
-            get {
-                return ResourceManager.GetString("Rectangle", resourceCulture);
-            }
-        }
-
-		internal static string Title {
-            get {
-                return ResourceManager.GetString("Title", resourceCulture);
             }
         }
     }

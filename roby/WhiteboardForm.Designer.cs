@@ -56,7 +56,8 @@
             this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.openButton = new System.Windows.Forms.ToolStripMenuItem();
             this.saveButton = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new DoubleBufferedPanel();
+            this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.panel1 = new roby.DoubleBufferedPanel();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -275,7 +276,8 @@
             // 
             this.fileButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openButton,
-            this.saveButton});
+            this.saveButton,
+            this.settingsToolStripMenuItem});
             this.fileButton.Image = ((System.Drawing.Image)(resources.GetObject("fileButton.Image")));
             this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.fileButton.Name = "fileButton";
@@ -285,7 +287,7 @@
             // 
             this.openButton.Image = ((System.Drawing.Image)(resources.GetObject("openButton.Image")));
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(103, 22);
+            this.openButton.Size = new System.Drawing.Size(168, 38);
             this.openButton.Text = "Open";
             this.openButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -293,9 +295,16 @@
             // 
             this.saveButton.Image = ((System.Drawing.Image)(resources.GetObject("saveButton.Image")));
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(103, 22);
+            this.saveButton.Size = new System.Drawing.Size(168, 38);
             this.saveButton.Text = "Save";
             this.saveButton.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
+            // 
+            // settingsToolStripMenuItem
+            // 
+            this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(168, 38);
+            this.settingsToolStripMenuItem.Text = "Settings";
+            this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // panel1
             // 
@@ -358,6 +367,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripDropDownButton fileButton;
         private DoubleBufferedPanel panel1;
+        private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
     }
 }
 

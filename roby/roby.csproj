@@ -53,10 +53,21 @@
     <Compile Include="IntroControl.Designer.cs">
       <DependentUpon>IntroControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="English.Designer.cs">
+      <DependentUpon>English.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Italian.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Italian.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings.Designer.cs">
+      <DependentUpon>Settings.cs</DependentUpon>
     </Compile>
     <Compile Include="WhiteboardForm.cs">
       <SubType>Form</SubType>
@@ -74,9 +85,16 @@
     <EmbeddedResource Include="IntroControl.resx">
       <DependentUpon>IntroControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="English.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>English.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Italian.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Italian.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings.resx">
+      <DependentUpon>Settings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="WhiteboardForm.resx">
       <DependentUpon>WhiteboardForm.cs</DependentUpon>
