@@ -214,11 +214,11 @@ namespace roby {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Forme.
+        ///   Cerca una stringa localizzata simile a Linee e Forme.
         /// </summary>
-        internal static string Shapes {
+        internal static string Shape {
             get {
-                return ResourceManager.GetString("Shapes", resourceCulture);
+                return ResourceManager.GetString("Shape", resourceCulture);
             }
         }
         

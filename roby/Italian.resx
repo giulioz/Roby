@@ -168,8 +168,8 @@
   <data name="Save" xml:space="preserve">
     <value>Salva</value>
   </data>
-  <data name="Shapes" xml:space="preserve">
-    <value>Forme</value>
+  <data name="Shape" xml:space="preserve">
+    <value>Linee e Forme</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Annulla</value>

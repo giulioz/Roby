@@ -12,48 +12,35 @@ namespace roby
 {
     public partial class DrawPanel : UserControl
     {
-        public Graphics panelGraphics;
-        public Point lastMousePos = Point.Empty;
         public Pen drawingPen;
         public bool penDown = false;
+        public List<Tuple<List<Point>, PenInfo>> _strokes = new List<Tuple<List<Point>, PenInfo>>();
+        List<Point> _currStroke;
 
         public DrawPanel()
         {
             InitializeComponent();
         }
 
-        private void DrawPanel_Load(object sender, EventArgs e)
-        {
-            panelGraphics = CreateGraphics();
-            panelGraphics.SmoothingMode = SmoothingMode.AntiAlias;
-        }
-
-        protected override void OnResize(EventArgs e)
-        {
-            panelGraphics = CreateGraphics();
-            panelGraphics.SmoothingMode = SmoothingMode.AntiAlias;
-            base.OnResize(e);
-        }
-
         protected override void OnMouseDown(MouseEventArgs e)
         {
             penDown = true;
-            lastMousePos = e.Location;
-            panelGraphics.DrawLine(drawingPen, e.X, e.Y, e.X + 1, e.Y - 1);
+            ((WhiteboardForm)Parent).undo.Push(new List<Tuple<List<Point>, PenInfo>>(_strokes));
+            _currStroke = new List<Point>();
+            _currStroke.Add(e.Location);
+            _strokes.Add(Tuple.Create(_currStroke, new PenInfo() { color = drawingPen.Color, width = drawingPen.Width }));
             base.OnMouseDown(e);
         }
 
         protected override void OnMouseUp(MouseEventArgs e)
         {
             penDown = false;
-            lastMousePos = Point.Empty;
             base.OnMouseUp(e);
         }
 
         protected override void OnMouseLeave(EventArgs e)
         {
             penDown = false;
-            lastMousePos = Point.Empty;
             base.OnMouseLeave(e);
         }
 
@@ -61,10 +48,27 @@ namespace roby
         {
             if (penDown)
             {
-                panelGraphics.DrawLine(drawingPen, lastMousePos, e.Location);
-                lastMousePos = e.Location;
+                _currStroke.Add(e.Location);
+                Refresh();
             }
             base.OnMouseMove(e);
         }
+
+        private void DrawPanel_Paint(object sender, PaintEventArgs e)
+        {
+            e.Graphics.SmoothingMode = SmoothingMode.AntiAlias;
+            foreach (Tuple<List<Point>, PenInfo> stroke in _strokes.Where(x => x.Item1.Count > 1))
+            {
+                Pen pen = new Pen(new SolidBrush(stroke.Item2.color), stroke.Item2.width);
+                e.Graphics.DrawLines(pen, stroke.Item1.ToArray());
+            }
+        }
+    }
+
+    [Serializable]
+    public class PenInfo
+    {
+        public Color color;
+        public float width;
     }
 }

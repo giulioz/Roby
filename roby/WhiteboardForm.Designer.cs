@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(WhiteboardForm));
             this.penButton = new System.Windows.Forms.ToolStripButton();
             this.highlButton = new System.Windows.Forms.ToolStripButton();
@@ -51,12 +50,12 @@
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.undoButton = new System.Windows.Forms.ToolStripButton();
             this.redoButton = new System.Windows.Forms.ToolStripButton();
-            this.trayMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
+            this.fileButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.openButton = new System.Windows.Forms.ToolStripMenuItem();
             this.saveButton = new System.Windows.Forms.ToolStripMenuItem();
             this.drawPanel1 = new roby.DrawPanel();
             this.toolStrip1.SuspendLayout();
-            this.trayMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // penButton
@@ -128,7 +127,6 @@
             // toolStrip1
             // 
             this.toolStrip1.AutoSize = false;
-            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.toolStrip1.ImageScalingSize = new System.Drawing.Size(32, 32);
             this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.penButton,
@@ -143,8 +141,10 @@
             this.clearButton,
             this.toolStripSeparator3,
             this.undoButton,
-            this.redoButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 589);
+            this.redoButton,
+            this.toolStripSeparator2,
+            this.fileButton});
+            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1080, 47);
             this.toolStrip1.TabIndex = 1;
@@ -238,6 +238,7 @@
             this.undoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.undoButton.Name = "undoButton";
             this.undoButton.Size = new System.Drawing.Size(28, 44);
+            this.undoButton.Click += new System.EventHandler(this.undoButton_Click);
             // 
             // redoButton
             // 
@@ -246,14 +247,22 @@
             this.redoButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.redoButton.Name = "redoButton";
             this.redoButton.Size = new System.Drawing.Size(28, 44);
+            this.redoButton.Click += new System.EventHandler(this.redoButton_Click);
             // 
-            // trayMenuStrip
+            // toolStripSeparator2
             // 
-            this.trayMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(6, 47);
+            // 
+            // fileButton
+            // 
+            this.fileButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.openButton,
             this.saveButton});
-            this.trayMenuStrip.Name = "trayMenuStrip";
-            this.trayMenuStrip.Size = new System.Drawing.Size(104, 48);
+            this.fileButton.Image = ((System.Drawing.Image)(resources.GetObject("fileButton.Image")));
+            this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.fileButton.Name = "fileButton";
+            this.fileButton.Size = new System.Drawing.Size(45, 44);
             // 
             // openButton
             // 
@@ -275,7 +284,7 @@
             // 
             this.drawPanel1.BackColor = System.Drawing.Color.White;
             this.drawPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.drawPanel1.Location = new System.Drawing.Point(0, 0);
+            this.drawPanel1.Location = new System.Drawing.Point(0, 47);
             this.drawPanel1.Name = "drawPanel1";
             this.drawPanel1.Size = new System.Drawing.Size(1080, 589);
             this.drawPanel1.TabIndex = 2;
@@ -296,7 +305,6 @@
             this.Load += new System.EventHandler(this.WhiteboardForm_Load);
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
-            this.trayMenuStrip.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -324,9 +332,12 @@
         private System.Windows.Forms.ToolStripButton redoButton;
         private System.Windows.Forms.ToolStripButton clearButton;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
-        private System.Windows.Forms.ContextMenuStrip trayMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem openButton;
         private System.Windows.Forms.ToolStripMenuItem saveButton;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
+        private System.Windows.Forms.ToolStripDropDownButton fileButton;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
     }
 }
 

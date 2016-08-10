@@ -35,9 +35,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
+            this.DoubleBuffered = true;
             this.Name = "DrawPanel";
             this.Size = new System.Drawing.Size(491, 401);
-            this.Load += new System.EventHandler(this.DrawPanel_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.DrawPanel_Paint);
             this.ResumeLayout(false);
 
         }

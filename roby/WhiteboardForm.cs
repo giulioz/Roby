@@ -4,6 +4,8 @@ using System.ComponentModel;
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -16,30 +18,39 @@ namespace roby
         public Pen  pen = new Pen(Color.Black, 2f),
                     highlighter = new Pen(new SolidBrush(Color.FromArgb(150, 255, 255, 0)), 30f),
                     rubber = new Pen(Color.White, 40f);
-        List<Bitmap> pages;
-        int selectedPage = 1;
+        public List<List<Tuple<List<Point>, PenInfo>>> pages;
+        public Stack<List<Tuple<List<Point>, PenInfo>>> undo = new Stack<List<Tuple<List<Point>, PenInfo>>>(),
+            redo = new Stack<List<Tuple<List<Point>, PenInfo>>>();
+        public int selectedPage = 1;
 
         public WhiteboardForm()
         {
             InitializeComponent();
             foreach (ToolStripMenuItem item in colorDropDownButton1.DropDownItems)
             {
-                item.Click += (object sender, EventArgs e) => drawPanel1.drawingPen.Color =
-                    Color.FromArgb(drawPanel1.drawingPen.Color.A, ((ToolStripMenuItem)sender).BackColor);
+                item.Click += (object sender, EventArgs e) => drawPanel1.drawingPen = new Pen(
+                    Color.FromArgb(drawPanel1.drawingPen.Color.A, ((ToolStripMenuItem)sender).BackColor), drawPanel1.drawingPen.Width);
             }
         }
 
         private void WhiteboardForm_Load(object sender, EventArgs e)
         {
-            this.Location = Screen.AllScreens[0].WorkingArea.Location;
-            this.Size = Screen.AllScreens[0].WorkingArea.Size;
-            drawPanel1.drawingPen = pen;
-            pages = new List<Bitmap>();
-            pages.Add(new Bitmap(drawPanel1.Width, drawPanel1.Height, PixelFormat.Format32bppArgb));
-            using (Graphics bgrap = Graphics.FromImage(pages[pages.Count - 1]))
+            // Form Position
+            if (Program.unix)
             {
-                bgrap.Clear(Color.White);
+                this.Location = Program.monitorIndex == 0 ? Point.Empty : new Point(Program.monitor0Size);
+                this.Size = Program.monitorIndex == 0 ? Program.monitor0Size : Program.monitor1Size;
             }
+            else
+            {
+                // In windows is much simpler...
+                this.Location = Screen.AllScreens[Program.monitorIndex].WorkingArea.Location;
+                this.Size = Screen.AllScreens[Program.monitorIndex].WorkingArea.Size;
+            }
+
+            drawPanel1.drawingPen = pen;
+            pages = new List<List<Tuple<List<Point>, PenInfo>>>();
+            pages.Add(new List<Tuple<List<Point>, PenInfo>>());
             LoadLocale();
         }
 
@@ -60,7 +71,7 @@ namespace roby
             this.clearButton.Text = Program.locale.GetString("Clear");
             this.undoButton.Text = Program.locale.GetString("Undo");
             this.redoButton.Text = Program.locale.GetString("Redo");
-            //this.toolStripDropDownButton1.Text = Program.locale.GetString("File");
+            this.fileButton.Text = Program.locale.GetString("File");
             this.openButton.Text = Program.locale.GetString("Open");
             this.saveButton.Text = Program.locale.GetString("Save");
             pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
@@ -89,71 +100,85 @@ namespace roby
 
         private void clearButton_Click(object sender, EventArgs e)
         {
-            drawPanel1.panelGraphics.Clear(Color.White);
+            drawPanel1._strokes = new List<Tuple<List<Point>, PenInfo>>();
+            drawPanel1.Refresh();
         }
 
         private void pforwardButton_Click(object sender, EventArgs e)
         {
             if (selectedPage == pages.Count)
             {
-                pages.Add(new Bitmap(drawPanel1.Width, drawPanel1.Height, PixelFormat.Format32bppArgb));
-                using (Graphics bgrap = Graphics.FromImage(pages[pages.Count - 1]))
-                {
-                    bgrap.Clear(Color.White);
-                }
+                pages.Add(new List<Tuple<List<Point>, PenInfo>>());
             }
-            using (Graphics bgrap = Graphics.FromImage(pages[selectedPage - 1]))
-            {
-                bgrap.CopyFromScreen(PointToScreen(Point.Empty).X, PointToScreen(Point.Empty).Y, 0, 0, drawPanel1.Size, CopyPixelOperation.SourceCopy);
-            }
+            pages[selectedPage - 1] = drawPanel1._strokes;
             selectedPage++;
             pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
-            drawPanel1.panelGraphics.DrawImageUnscaled(pages[selectedPage - 1], 0, 0);
+            drawPanel1._strokes = pages[selectedPage - 1];
+            drawPanel1.Refresh();
         }
 
         private void pbackButton_Click(object sender, EventArgs e)
         {
             if (selectedPage != 1)
             {
-                using (Graphics bgrap = Graphics.FromImage(pages[selectedPage - 1]))
-                {
-                    bgrap.CopyFromScreen(PointToScreen(Point.Empty).X, PointToScreen(Point.Empty).Y, 0, 0, drawPanel1.Size);
-                }
+                pages[selectedPage - 1] = drawPanel1._strokes;
                 selectedPage--;
                 pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
-                drawPanel1.panelGraphics.DrawImageUnscaled(pages[selectedPage - 1], 0, 0);
+                drawPanel1._strokes = pages[selectedPage - 1];
+                drawPanel1.Refresh();
             }
         }
 
-        private void notifyIcon1_Click(object sender, EventArgs e)
+        private void undoButton_Click(object sender, EventArgs e)
         {
-            trayMenuStrip.Show();
+            if (undo.Count != 0)
+            {
+                redo.Push(new List<Tuple<List<Point>, PenInfo>>(drawPanel1._strokes));
+                drawPanel1._strokes = undo.Pop();
+                drawPanel1.Refresh();
+            }
+        }
+
+        private void redoButton_Click(object sender, EventArgs e)
+        {
+            if (redo.Count != 0)
+            {
+                undo.Push(new List<Tuple<List<Point>, PenInfo>>(drawPanel1._strokes));
+                drawPanel1._strokes = redo.Pop();
+                drawPanel1.Refresh();
+            }
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            if (dlg.ShowDialog() == DialogResult.OK)
+            dlg.Filter = "ROBY Files (*.rob)|*.rob";
+            if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                drawPanel1.panelGraphics.DrawImage(Image.FromFile(dlg.FileName), 0, 0, drawPanel1.Width, drawPanel1.Height);
+                BinaryFormatter formatter = new BinaryFormatter();
+                Stream st = File.OpenRead(dlg.FileName);
+                object result = formatter.Deserialize(st);
+                st.Close();
+                pages = (List<List<Tuple<List<Point>, PenInfo>>>)result;
+                selectedPage = 1;
+                drawPanel1._strokes = pages[selectedPage - 1];
+                drawPanel1.Refresh();
             }
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (Graphics bgrap = Graphics.FromImage(pages[selectedPage - 1]))
-            {
-                bgrap.CopyFromScreen(PointToScreen(Point.Empty).X, PointToScreen(Point.Empty).Y, 0, 0, drawPanel1.Size);
-            }
-            
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "PNG|*.png";
-            if (dlg.ShowDialog() == DialogResult.OK)
+            dlg.Filter = "ROBY Files (*.rob)|*.rob";
+            if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                pages[selectedPage - 1].Save(dlg.FileName);
+                pages[selectedPage - 1] = drawPanel1._strokes;
+                BinaryFormatter formatter = new BinaryFormatter();
+                Stream st = File.OpenWrite(dlg.FileName);
+                formatter.Serialize(st, pages);
+                st.Flush();
+                st.Close();
             }
-
-            drawPanel1.panelGraphics.DrawImageUnscaled(pages[selectedPage - 1], 0, 0);
         }
     }
 }
