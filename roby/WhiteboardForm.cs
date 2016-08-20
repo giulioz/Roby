@@ -196,6 +196,12 @@ namespace roby
             highlButton.Checked = false;
 			mode = DrawingMode.Pen;
             drawingPen = rubber;
+
+            if (!rubberButton.Checked) {
+                undo.Push(new List<Tuple<List<Point>, PenInfo>>(pages[selectedPage - 1]));
+                pages[selectedPage - 1] = new List<Tuple<List<Point>, PenInfo>>();
+                Refresh();
+            }
         }
 
         private void lineButton_Click(object sender, EventArgs e)
