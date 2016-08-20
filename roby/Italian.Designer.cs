@@ -106,6 +106,15 @@ namespace roby {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Esci.
+        /// </summary>
+        internal static string Exit {
+            get {
+                return ResourceManager.GetString("Exit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a File.
         /// </summary>
         internal static string File {

@@ -111,6 +111,7 @@ namespace roby
             this.saveButton.Text = Program.locale.GetString("Save");
 			this.lineButton.Text = Program.locale.GetString("Line");
             this.rectButton.Text = Program.locale.GetString("Rectangle");
+            this.exitToolStripMenuItem.Text = Program.locale.GetString("Exit");
             this.settingsToolStripMenuItem.Text = Program.locale.GetString("Settings");
             this.Text = Program.locale.GetString("Title");
             pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
@@ -271,6 +272,11 @@ namespace roby
                 pages[selectedPage - 1] = redo.Pop();
                 panel1.Refresh();
             }
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
