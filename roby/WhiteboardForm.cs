@@ -20,6 +20,9 @@ namespace roby
         {
             Pen,
             Line,
+            SnapLine,
+            Arrow,
+            Circle,
             Rectangle,
         }
 
@@ -30,8 +33,8 @@ namespace roby
             public float width;
         }
 
-        public Pen  pen = new Pen(Color.Black, 2f),
-                    highlighter = new Pen(new SolidBrush(Color.FromArgb(150, 255, 255, 0)), 30f),
+        public const double SnapThreshold = 400;
+        public Pen  highlighter = new Pen(new SolidBrush(Color.FromArgb(150, 255, 255, 0)), 30f),
                     rubber = new Pen(Color.White, 40f);
         public List<List<Tuple<List<Point>, PenInfo>>> pages;
         public Stack<List<Tuple<List<Point>, PenInfo>>> undo = new Stack<List<Tuple<List<Point>, PenInfo>>>(),
@@ -83,7 +86,7 @@ namespace roby
             }*/
             intro.Location = new Point(this.Width / 2 - intro.Width / 2, this.Height / 2 - intro.Width / 2);
 
-            drawingPen = pen;
+            drawingPen = new Pen(Color.Black, 2f);
             pages = new List<List<Tuple<List<Point>, PenInfo>>>();
             pages.Add(new List<Tuple<List<Point>, PenInfo>>());
             LoadLocale();
@@ -110,7 +113,10 @@ namespace roby
             this.openButton.Text = Program.locale.GetString("Open");
             this.saveButton.Text = Program.locale.GetString("Save");
 			this.lineButton.Text = Program.locale.GetString("Line");
+            this.snaplineButton.Text = Program.locale.GetString("SnapLine");
+            this.arrowButton.Text = Program.locale.GetString("Arrow");
             this.rectButton.Text = Program.locale.GetString("Rectangle");
+            this.circleButton.Text = Program.locale.GetString("Circle");
             this.exitToolStripMenuItem.Text = Program.locale.GetString("Exit");
             this.settingsToolStripMenuItem.Text = Program.locale.GetString("Settings");
             this.Text = Program.locale.GetString("Title");
@@ -129,9 +135,28 @@ namespace roby
             undo.Push(new List<Tuple<List<Point>, PenInfo>>(pages[selectedPage - 1]));
             _currStroke = new List<Point>();
             _currStroke.Add(e.Location);
-            if (mode == DrawingMode.Line) _currStroke.Add(e.Location);
+            if (mode == DrawingMode.Line)
+            {
+                _currStroke[0] = Snap(_currStroke[0]);
+                _currStroke.Add(e.Location);
+            }
+            if (mode == DrawingMode.SnapLine)
+            {
+                _currStroke[0] = Snap(_currStroke[0]);
+                _currStroke.Add(e.Location);
+            }
             if (mode == DrawingMode.Rectangle)
             {
+                _currStroke[0] = Snap(_currStroke[0]);
+                _currStroke.Add(_currStroke[0]);
+                _currStroke.Add(_currStroke[0]);
+                _currStroke.Add(_currStroke[0]);
+                _currStroke.Add(_currStroke[0]);
+            }
+            if (mode == DrawingMode.Arrow)
+            {
+                _currStroke[0] = Snap(_currStroke[0]);
+                _currStroke.Add(e.Location);
                 _currStroke.Add(e.Location);
                 _currStroke.Add(e.Location);
                 _currStroke.Add(e.Location);
@@ -150,15 +175,77 @@ namespace roby
             if (penDown)
             {
                 if (mode == DrawingMode.Pen) _currStroke.Add(e.Location);
-                else if (mode == DrawingMode.Line) _currStroke[1] = e.Location;
+                else if (mode == DrawingMode.Line) _currStroke[1] = Snap(e.Location);
+                else if (mode == DrawingMode.SnapLine)
+                {
+                    double l = Math.Sqrt(Distance(e.Location, _currStroke[0]));
+                    float angle = (float)Math.Acos((e.X - _currStroke[0].X) / l);
+                    bool invert = e.Y - _currStroke[0].Y > 0;
+                    angle = (int)(angle / 0.3927f) * 0.3927f;
+
+                    _currStroke[1] = Snap(new Point((int)(_currStroke[0].X + Math.Cos(angle) * l),
+                                    (int)(_currStroke[0].Y + (invert ? 1 : -1) * Math.Sin(angle) * l)));
+                }
                 else if (mode == DrawingMode.Rectangle)
                 {
-                    _currStroke[1] = new Point(e.X, _currStroke[0].Y);
-                    _currStroke[2] = e.Location;
-                    _currStroke[3] = new Point(_currStroke[0].X, e.Y);
+                    _currStroke[2] = Snap(e.Location);
+                    _currStroke[1] = new Point(_currStroke[2].X, _currStroke[0].Y);
+                    _currStroke[3] = new Point(_currStroke[0].X, _currStroke[2].Y);
+                }
+                else if (mode == DrawingMode.Arrow)
+                {
+                    double l = Math.Sqrt(Distance(e.Location, _currStroke[0]));
+                    float angle = (float)Math.Acos((e.X - _currStroke[0].X) / l);
+                    bool invert = e.Y - _currStroke[0].Y > 0;
+                    _currStroke[1] = Snap(e.Location);
+                    _currStroke[2] = new Point((int)(_currStroke[1].X + (float)Math.Cos(angle + 2.5f) * 20f),
+                                            (int)(_currStroke[1].Y + (invert ? 1 : -1) * 
+                                                    (float)Math.Sin(angle + 2.5f) * 20f));
+                    _currStroke[3] = _currStroke[1];
+                    _currStroke[4] = new Point((int)(_currStroke[1].X + (float)Math.Cos(angle - 2.5f) * 20f),
+                                            (int)(_currStroke[1].Y + (invert ? 1 : -1) * 
+                                                    (float)Math.Sin(angle - 2.5f) * 20f));
+                    _currStroke[5] = _currStroke[1];
                 }
                 panel1.Refresh();
             }
+        }
+
+        private Point Snap(Point near)
+        {
+            if (pages[selectedPage - 1].Count <= 1)
+                return near;
+            
+            double min = Distance(near, pages[selectedPage - 1][0].Item1.First());
+            Point p = pages[selectedPage - 1][0].Item1.First();
+            if (min < SnapThreshold)
+                return new Point(p.X, p.Y);
+            
+            for (int i = 0; i < pages[selectedPage - 1].Count - 1; i++)
+            {
+                if (Distance(near, pages[selectedPage - 1][i].Item1.First()) < min)
+                {
+                    min = Distance(near, pages[selectedPage - 1][i].Item1.First());
+                    p = pages[selectedPage - 1][i].Item1.First();
+
+                    if (min < SnapThreshold)
+                        return new Point(p.X, p.Y);
+                }
+                if (Distance(near, pages[selectedPage - 1][i].Item1.Last()) < min)
+                {
+                    min = Distance(near, pages[selectedPage - 1][i].Item1.Last());
+                    p = pages[selectedPage - 1][i].Item1.Last();
+
+                    if (min < SnapThreshold)
+                        return new Point(p.X, p.Y);
+                }
+            }
+            return near;
+        }
+
+        private double Distance(Point a , Point b)
+        {
+            return (a.X - b.X) * (a.X - b.X) + (a.Y - b.Y) * (a.Y - b.Y);
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
@@ -174,12 +261,28 @@ namespace roby
             }
         }
 
+        private void penThinButton_Click(object sender, EventArgs e)
+        {
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+			mode = DrawingMode.Pen;
+            drawingPen = new Pen(Color.Black, 2f);
+        }
+
         private void penButton_Click(object sender, EventArgs e)
         {
             highlButton.Checked = false;
             rubberButton.Checked = false;
 			mode = DrawingMode.Pen;
-            drawingPen = pen;
+            drawingPen = new Pen(Color.Black, 2f);
+        }
+
+        private void penThickButton_Click(object sender, EventArgs e)
+        {
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+			mode = DrawingMode.Pen;
+            drawingPen = new Pen(Color.Black, 2f);
         }
 
         private void highlButton_Click(object sender, EventArgs e)
@@ -207,7 +310,22 @@ namespace roby
         private void lineButton_Click(object sender, EventArgs e)
         {
             mode = DrawingMode.Line;
-            drawingPen = pen;
+            penButton.Checked = false;
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+        }
+
+        private void snaplineButton_Click(object sender, EventArgs e)
+        {
+            mode = DrawingMode.SnapLine;
+            penButton.Checked = false;
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+        }
+
+        private void arrowButton_Click(object sender, EventArgs e)
+        {
+            mode = DrawingMode.Arrow;
             penButton.Checked = false;
             highlButton.Checked = false;
             rubberButton.Checked = false;
@@ -216,7 +334,14 @@ namespace roby
         private void rectButton_Click(object sender, EventArgs e)
         {
             mode = DrawingMode.Rectangle;
-            drawingPen = pen;
+            penButton.Checked = false;
+            highlButton.Checked = false;
+            rubberButton.Checked = false;
+        }
+
+        private void circleButton_Click(object sender, EventArgs e)
+        {
+            mode = DrawingMode.Circle;
             penButton.Checked = false;
             highlButton.Checked = false;
             rubberButton.Checked = false;

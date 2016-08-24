@@ -39,7 +39,10 @@
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.shapeButton = new System.Windows.Forms.ToolStripDropDownButton();
             this.lineButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.snaplineButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.arrowButton = new System.Windows.Forms.ToolStripMenuItem();
             this.rectButton = new System.Windows.Forms.ToolStripMenuItem();
+            this.circleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
             this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -148,17 +151,19 @@
             this.redoButton,
             this.toolStripSeparator2,
             this.fileButton});
-            this.toolStrip1.Location = new System.Drawing.Point(0, 0);
             this.toolStrip1.Name = "toolStrip1";
             this.toolStrip1.Size = new System.Drawing.Size(1080, 47);
             this.toolStrip1.TabIndex = 1;
-            this.toolStrip1.Text = "toolStrip1";
+            this.toolStrip1.Dock = System.Windows.Forms.DockStyle.Bottom;
             // 
             // shapeButton
             // 
             this.shapeButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.lineButton,
-            this.rectButton});
+            this.snaplineButton,
+            this.arrowButton,
+            this.rectButton,
+            this.circleButton});
             this.shapeButton.Image = ((System.Drawing.Image)(resources.GetObject("shapeButton.Image")));
             this.shapeButton.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.shapeButton.Name = "shapeButton";
@@ -170,11 +175,30 @@
             this.lineButton.Size = new System.Drawing.Size(67, 22);
             this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
             // 
+            // snaplineButton
+            // 
+            this.snaplineButton.Name = "snaplineButton";
+            this.snaplineButton.Size = new System.Drawing.Size(67, 22);
+            this.snaplineButton.Click += new System.EventHandler(this.snaplineButton_Click);
+            // 
+            // arrowButton
+            // 
+            this.arrowButton.Name = "arrowButton";
+            this.arrowButton.Size = new System.Drawing.Size(67, 22);
+            this.arrowButton.Click += new System.EventHandler(this.arrowButton_Click);
+            // 
             // rectButton
             // 
             this.rectButton.Name = "rectButton";
             this.rectButton.Size = new System.Drawing.Size(67, 22);
             this.rectButton.Click += new System.EventHandler(this.rectButton_Click);
+            // 
+            // circleButton
+            // 
+            this.circleButton.Name = "circleButton";
+            this.circleButton.Size = new System.Drawing.Size(67, 22);
+            this.circleButton.Click += new System.EventHandler(this.circleButton_Click);
+            this.circleButton.Enabled = false;
             // 
             // colorDropDownButton1
             // 
@@ -367,7 +391,10 @@
         private System.Windows.Forms.ToolStripMenuItem cyanToolStripMenuItem;
         private System.Windows.Forms.ToolStripDropDownButton shapeButton;
 		private System.Windows.Forms.ToolStripMenuItem lineButton;
+        private System.Windows.Forms.ToolStripMenuItem snaplineButton;
+        private System.Windows.Forms.ToolStripMenuItem arrowButton;
 		private System.Windows.Forms.ToolStripMenuItem rectButton;
+        private System.Windows.Forms.ToolStripMenuItem circleButton;
         private System.Windows.Forms.ToolStripButton undoButton;
         private System.Windows.Forms.ToolStripButton redoButton;
         private System.Windows.Forms.ToolStripButton clearButton;

@@ -142,11 +142,20 @@ namespace roby {
         }
         
         /// <summary>
-        ///   Cerca una stringa localizzata simile a Linea dritta.
+        ///   Cerca una stringa localizzata simile a Linea.
         /// </summary>
         internal static string Line {
             get {
                 return ResourceManager.GetString("Line", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Linea dritta.
+        /// </summary>
+        internal static string SnapLine {
+            get {
+                return ResourceManager.GetString("SnapLine", resourceCulture);
             }
         }
         

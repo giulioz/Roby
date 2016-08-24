@@ -178,10 +178,19 @@
     <value>Giallo</value>
   </data>
   <data name="Line" xml:space="preserve">
-    <value>Linea dritta</value>
+    <value>Linea</value>
+  </data>
+  <data name="SnapLine" xml:space="preserve">
+    <value>Linea Dritta</value>
+  </data>
+  <data name="Arrow" xml:space="preserve">
+    <value>Freccia</value>
   </data>
   <data name="Rectangle" xml:space="preserve">
     <value>Rettangolo</value>
+  </data>
+  <data name="Circle" xml:space="preserve">
+    <value>Cerchio</value>
   </data>
   <data name="Title" xml:space="preserve">
     <value>Lavagna Roby</value>
