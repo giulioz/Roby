@@ -61,6 +61,15 @@ namespace roby {
         }
         
         /// <summary>
+        ///   Cerca una stringa localizzata simile a Arrow.
+        /// </summary>
+        internal static string Arrow {
+            get {
+                return ResourceManager.GetString("Arrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Cerca una stringa localizzata simile a Black.
         /// </summary>
         internal static string Black {
@@ -75,6 +84,15 @@ namespace roby {
         internal static string Blue {
             get {
                 return ResourceManager.GetString("Blue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Circle.
+        /// </summary>
+        internal static string Circle {
+            get {
+                return ResourceManager.GetString("Circle", resourceCulture);
             }
         }
         
@@ -264,6 +282,15 @@ namespace roby {
         internal static string Shape {
             get {
                 return ResourceManager.GetString("Shape", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Cerca una stringa localizzata simile a Straight Line.
+        /// </summary>
+        internal static string SnapLine {
+            get {
+                return ResourceManager.GetString("SnapLine", resourceCulture);
             }
         }
         

@@ -195,4 +195,13 @@
   <data name="Exit" xml:space="preserve">
     <value>Exit</value>
   </data>
+  <data name="Arrow" xml:space="preserve">
+    <value>Arrow</value>
+  </data>
+  <data name="Circle" xml:space="preserve">
+    <value>Circle</value>
+  </data>
+  <data name="SnapLine" xml:space="preserve">
+    <value>Straight Line</value>
+  </data>
 </root>
