@@ -18,6 +18,9 @@ namespace roby
 
         private void Settings_Load(object sender, EventArgs e)
         {
+            textBox1.Enabled = Program.unix;
+            textBox2.Enabled = Program.unix;
+
             numericUpDown1.Value = Program.monitorIndex;
             textBox1.Text = Program.monitor0Size.Width + "x" + Program.monitor0Size.Height;
             textBox2.Text = Program.monitor1Size.Width + "x" + Program.monitor1Size.Height;

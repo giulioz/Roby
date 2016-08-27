@@ -14,7 +14,7 @@ namespace roby
         public static ResourceManager locale;
         public static bool unix;
 
-        public static int monitorIndex;
+        public static int monitorIndex, yOffset;
         public static Size monitor0Size, monitor1Size;
 		public static bool single;
 
@@ -37,6 +37,7 @@ namespace roby
                 monitor0Size = new Size(int.Parse(file[1]), int.Parse(file[2]));
                 monitor1Size = new Size(int.Parse(file[3]), int.Parse(file[4]));
 				single = bool.Parse(file[5]);
+                yOffset = int.Parse(file[6]);
             }
             catch (Exception)
             {
@@ -44,6 +45,7 @@ namespace roby
                 monitor0Size = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size;
                 monitor1Size = System.Windows.Forms.Screen.PrimaryScreen.WorkingArea.Size;
 				single = true;
+                yOffset = 0;
             }
 
             locale = new ResourceManager(typeof(English));
@@ -60,7 +62,7 @@ namespace roby
         public static void SaveSettings()
         {
             string[] file = new string[] { monitorIndex.ToString(), monitor0Size.Width.ToString(), monitor0Size.Height.ToString(),
-                                            monitor1Size.Width.ToString(), monitor1Size.Height.ToString(), single.ToString()};
+                                            monitor1Size.Width.ToString(), monitor1Size.Height.ToString(), single.ToString(), "0"};
             if (unix)
                 System.IO.File.WriteAllLines("/home/" + Environment.UserName + "/roby.conf", file);
             else
