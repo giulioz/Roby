@@ -174,35 +174,35 @@
             // 
             this.lineButton.Image = ((System.Drawing.Image)(resources.GetObject("lineButton.Image")));
             this.lineButton.Name = "lineButton";
-            this.lineButton.Size = new System.Drawing.Size(168, 38);
+            this.lineButton.Size = new System.Drawing.Size(67, 22);
             this.lineButton.Click += new System.EventHandler(this.lineButton_Click);
             // 
             // snaplineButton
             // 
             this.snaplineButton.Image = ((System.Drawing.Image)(resources.GetObject("snaplineButton.Image")));
             this.snaplineButton.Name = "snaplineButton";
-            this.snaplineButton.Size = new System.Drawing.Size(168, 38);
+            this.snaplineButton.Size = new System.Drawing.Size(67, 22);
             this.snaplineButton.Click += new System.EventHandler(this.snaplineButton_Click);
             // 
             // arrowButton
             // 
             this.arrowButton.Image = ((System.Drawing.Image)(resources.GetObject("arrowButton.Image")));
             this.arrowButton.Name = "arrowButton";
-            this.arrowButton.Size = new System.Drawing.Size(168, 38);
+            this.arrowButton.Size = new System.Drawing.Size(67, 22);
             this.arrowButton.Click += new System.EventHandler(this.arrowButton_Click);
             // 
             // rectButton
             // 
             this.rectButton.Image = ((System.Drawing.Image)(resources.GetObject("rectButton.Image")));
             this.rectButton.Name = "rectButton";
-            this.rectButton.Size = new System.Drawing.Size(168, 38);
+            this.rectButton.Size = new System.Drawing.Size(67, 22);
             this.rectButton.Click += new System.EventHandler(this.rectButton_Click);
             // 
             // circleButton
             // 
             this.circleButton.Enabled = false;
             this.circleButton.Name = "circleButton";
-            this.circleButton.Size = new System.Drawing.Size(168, 38);
+            this.circleButton.Size = new System.Drawing.Size(67, 22);
             this.circleButton.Click += new System.EventHandler(this.circleButton_Click);
             // 
             // colorDropDownButton1
@@ -225,46 +225,46 @@
             this.blackToolStripMenuItem.BackColor = System.Drawing.Color.Black;
             this.blackToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.blackToolStripMenuItem.Name = "blackToolStripMenuItem";
-            this.blackToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blackToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // redToolStripMenuItem
             // 
             this.redToolStripMenuItem.BackColor = System.Drawing.Color.Red;
             this.redToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.redToolStripMenuItem.Name = "redToolStripMenuItem";
-            this.redToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.redToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // greenToolStripMenuItem
             // 
             this.greenToolStripMenuItem.BackColor = System.Drawing.Color.LimeGreen;
             this.greenToolStripMenuItem.Name = "greenToolStripMenuItem";
-            this.greenToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.greenToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // blueToolStripMenuItem
             // 
             this.blueToolStripMenuItem.BackColor = System.Drawing.Color.Blue;
             this.blueToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.blueToolStripMenuItem.Name = "blueToolStripMenuItem";
-            this.blueToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.blueToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // yellowToolStripMenuItem
             // 
             this.yellowToolStripMenuItem.BackColor = System.Drawing.Color.Gold;
             this.yellowToolStripMenuItem.Name = "yellowToolStripMenuItem";
-            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.yellowToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // magentaToolStripMenuItem
             // 
             this.magentaToolStripMenuItem.BackColor = System.Drawing.Color.Magenta;
             this.magentaToolStripMenuItem.ForeColor = System.Drawing.Color.White;
             this.magentaToolStripMenuItem.Name = "magentaToolStripMenuItem";
-            this.magentaToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.magentaToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // cyanToolStripMenuItem
             // 
             this.cyanToolStripMenuItem.BackColor = System.Drawing.Color.Cyan;
             this.cyanToolStripMenuItem.Name = "cyanToolStripMenuItem";
-            this.cyanToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cyanToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
             // 
             // clearButton
             // 
@@ -318,7 +318,7 @@
             // 
             this.openButton.Image = ((System.Drawing.Image)(resources.GetObject("openButton.Image")));
             this.openButton.Name = "openButton";
-            this.openButton.Size = new System.Drawing.Size(168, 38);
+            this.openButton.Size = new System.Drawing.Size(116, 22);
             this.openButton.Text = "Open";
             this.openButton.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -326,21 +326,21 @@
             // 
             this.saveButton.Image = ((System.Drawing.Image)(resources.GetObject("saveButton.Image")));
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(168, 38);
+            this.saveButton.Size = new System.Drawing.Size(116, 22);
             this.saveButton.Text = "Save";
             this.saveButton.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
             this.settingsToolStripMenuItem.Name = "settingsToolStripMenuItem";
-            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(168, 38);
+            this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(168, 38);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -362,13 +362,10 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1080, 636);
-            this.ControlBox = false;
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.toolStrip1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "WhiteboardForm";
-            this.ShowInTaskbar = false;
             this.Text = "Roby Whiteboard";
             this.Load += new System.EventHandler(this.WhiteboardForm_Load);
             this.toolStrip1.ResumeLayout(false);

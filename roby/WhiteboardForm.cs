@@ -6,6 +6,7 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
@@ -77,12 +78,14 @@ namespace roby
             {
                 this.Location = Program.monitorIndex == 0 ? Point.Empty : new Point(Program.monitor0Size.Width, Program.yOffset);
                 this.Size = Program.monitorIndex == 0 ? Program.monitor0Size : Program.monitor1Size;
+                this.WindowState = FormWindowState.Maximized;
             }
             else
             {
-                // In windows is much simpler...
+                // Windows...
                 this.Location = Screen.AllScreens[Program.monitorIndex].WorkingArea.Location;
                 this.Size = Screen.AllScreens[Program.monitorIndex].WorkingArea.Size;
+                this.WindowState = FormWindowState.Maximized;
             }
             intro.Location = new Point(this.Width / 2 - intro.Width / 2, this.Height / 2 - intro.Width / 2);
 
