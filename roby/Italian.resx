@@ -169,7 +169,7 @@
     <value>Salva</value>
   </data>
   <data name="Shape" xml:space="preserve">
-    <value>Linee e Forme</value>
+    <value>Forme</value>
   </data>
   <data name="Undo" xml:space="preserve">
     <value>Annulla</value>
@@ -203,5 +203,20 @@
   </data>
   <data name="Exit" xml:space="preserve">
     <value>Esci</value>
+  </data>
+  <data name="Background" xml:space="preserve">
+    <value>Sfondo</value>
+  </data>
+  <data name="PenWidth" xml:space="preserve">
+    <value>Largh. Penna</value>
+  </data>
+  <data name="Thin" xml:space="preserve">
+    <value>Fine</value>
+  </data>
+  <data name="Medium" xml:space="preserve">
+    <value>Media</value>
+  </data>
+  <data name="Thick" xml:space="preserve">
+    <value>Grossa</value>
   </data>
 </root>

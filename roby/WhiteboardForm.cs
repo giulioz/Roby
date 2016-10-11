@@ -6,7 +6,6 @@ using System.Drawing.Drawing2D;
 using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 using System.Threading;
@@ -102,6 +101,10 @@ namespace roby
             this.rubberButton.Text = Program.locale.GetString("Rubber");
             this.shapeButton.Text = Program.locale.GetString("Shape");
             this.colorDropDownButton1.Text = Program.locale.GetString("Color");
+            this.weightDropDownButton1.Text = Program.locale.GetString("PenWidth");
+            this.thinToolStripMenuItem.Text = Program.locale.GetString("Thin");
+            this.mediumToolStripMenuItem.Text = Program.locale.GetString("Medium");
+            this.thickToolStripMenuItem.Text = Program.locale.GetString("Thick");
             this.blackToolStripMenuItem.Text = Program.locale.GetString("Black");
             this.redToolStripMenuItem.Text = Program.locale.GetString("Red");
             this.greenToolStripMenuItem.Text = Program.locale.GetString("Green");
@@ -122,6 +125,7 @@ namespace roby
             this.circleButton.Text = Program.locale.GetString("Circle");
             this.exitToolStripMenuItem.Text = Program.locale.GetString("Exit");
             this.settingsToolStripMenuItem.Text = Program.locale.GetString("Settings");
+            this.backToolStripMenuItem.Text = Program.locale.GetString("Background");
             this.Text = Program.locale.GetString("Title");
             pageLabel.Text = Program.locale.GetString("Page") + ": " + selectedPage.ToString() + " " + Program.locale.GetString("of") + " " + pages.Count;
         }
@@ -264,23 +268,7 @@ namespace roby
             }
         }
 
-        private void penThinButton_Click(object sender, EventArgs e)
-        {
-            highlButton.Checked = false;
-            rubberButton.Checked = false;
-			mode = DrawingMode.Pen;
-            drawingPen = new Pen(Color.Black, 2f);
-        }
-
         private void penButton_Click(object sender, EventArgs e)
-        {
-            highlButton.Checked = false;
-            rubberButton.Checked = false;
-			mode = DrawingMode.Pen;
-            drawingPen = new Pen(Color.Black, 2f);
-        }
-
-        private void penThickButton_Click(object sender, EventArgs e)
         {
             highlButton.Checked = false;
             rubberButton.Checked = false;
@@ -348,6 +336,21 @@ namespace roby
             penButton.Checked = false;
             highlButton.Checked = false;
             rubberButton.Checked = false;
+        }
+
+        private void thinPen_Click(object sender, EventArgs e)
+        {
+            drawingPen = new Pen(drawingPen.Color, 2f);
+        }
+
+        private void mediumPen_Click(object sender, EventArgs e)
+        {
+            drawingPen = new Pen(drawingPen.Color, 4f);
+        }
+
+        private void thickPen_Click(object sender, EventArgs e)
+        {
+            drawingPen = new Pen(drawingPen.Color, 6f);
         }
 
         private void clearButton_Click(object sender, EventArgs e)
@@ -432,20 +435,41 @@ namespace roby
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.Filter = "ROBY Files (*.rob)|*.rob";
+            dlg.Filter = "PNG (*.PNG)|*.png|ROBY Files (*.rob)|*.rob";
             if (dlg.ShowDialog(this) == DialogResult.OK)
             {
-                BinaryFormatter formatter = new BinaryFormatter();
-                Stream st = File.OpenWrite(dlg.FileName);
-                formatter.Serialize(st, pages);
-                st.Flush();
-                st.Close();
+                if (dlg.FilterIndex == 1)
+                {
+                    Bitmap bitmap = new Bitmap(panel1.Width, panel1.Height);
+                    Graphics g = Graphics.FromImage(bitmap);
+                    g.SmoothingMode = SmoothingMode.AntiAlias;
+                    foreach (Tuple<List<Point>, PenInfo> stroke in pages[selectedPage - 1].Where(x => x.Item1.Count > 1))
+                    {
+                        Pen pen = new Pen(new SolidBrush(stroke.Item2.color), stroke.Item2.width);
+                        g.DrawLines(pen, stroke.Item1.ToArray());
+                    }
+                    bitmap.Save(dlg.FileName, ImageFormat.Png);
+                    bitmap.Dispose();
+                }
+                else if (dlg.FilterIndex == 2)
+                {
+                    BinaryFormatter formatter = new BinaryFormatter();
+                    Stream st = File.OpenWrite(dlg.FileName);
+                    formatter.Serialize(st, pages);
+                    st.Flush();
+                    st.Close();
+                }
             }
         }
 
         private void settingsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             new Settings().ShowDialog(this);
+        }
+
+        private void backToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

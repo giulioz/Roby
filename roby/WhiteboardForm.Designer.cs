@@ -44,6 +44,10 @@
             this.rectButton = new System.Windows.Forms.ToolStripMenuItem();
             this.circleButton = new System.Windows.Forms.ToolStripMenuItem();
             this.colorDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.weightDropDownButton1 = new System.Windows.Forms.ToolStripDropDownButton();
+            this.thinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mediumToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thickToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.blackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.redToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.greenToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -60,6 +64,7 @@
             this.openButton = new System.Windows.Forms.ToolStripMenuItem();
             this.saveButton = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.backToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel1 = new roby.DoubleBufferedPanel();
             this.toolStrip1.SuspendLayout();
@@ -146,6 +151,7 @@
             this.pbackButton,
             this.pageLabel,
             this.colorDropDownButton1,
+            this.weightDropDownButton1,
             this.clearButton,
             this.toolStripSeparator3,
             this.undoButton,
@@ -219,6 +225,33 @@
             this.colorDropDownButton1.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.colorDropDownButton1.Name = "colorDropDownButton1";
             this.colorDropDownButton1.Size = new System.Drawing.Size(45, 44);
+            // 
+            // weightDropDownButton1
+            // 
+            this.weightDropDownButton1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thinToolStripMenuItem,
+            this.mediumToolStripMenuItem,
+            this.thickToolStripMenuItem});
+            this.weightDropDownButton1.Name = "weightDropDownButton1";
+            this.weightDropDownButton1.Size = new System.Drawing.Size(45, 44);
+            // 
+            // thinToolStripMenuItem
+            // 
+            this.thinToolStripMenuItem.Name = "thinToolStripMenuItem";
+            this.thinToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.thinToolStripMenuItem.Click += new System.EventHandler(this.thinPen_Click);
+            // 
+            // mediumToolStripMenuItem
+            // 
+            this.mediumToolStripMenuItem.Name = "mediumToolStripMenuItem";
+            this.mediumToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.mediumToolStripMenuItem.Click += new System.EventHandler(this.mediumPen_Click);
+            // 
+            // thickToolStripMenuItem
+            // 
+            this.thickToolStripMenuItem.Name = "thickToolStripMenuItem";
+            this.thickToolStripMenuItem.Size = new System.Drawing.Size(67, 22);
+            this.thickToolStripMenuItem.Click += new System.EventHandler(this.thickPen_Click);
             // 
             // blackToolStripMenuItem
             // 
@@ -308,6 +341,7 @@
             this.openButton,
             this.saveButton,
             this.settingsToolStripMenuItem,
+            this.backToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileButton.Image = ((System.Drawing.Image)(resources.GetObject("fileButton.Image")));
             this.fileButton.ImageTransparentColor = System.Drawing.Color.Magenta;
@@ -336,6 +370,19 @@
             this.settingsToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
             this.settingsToolStripMenuItem.Text = "Settings";
             this.settingsToolStripMenuItem.Click += new System.EventHandler(this.settingsToolStripMenuItem_Click);
+            // 
+            // backToolStripMenuItem
+            // 
+            this.backToolStripMenuItem.Name = "backToolStripMenuItem";
+            this.backToolStripMenuItem.Size = new System.Drawing.Size(116, 22);
+            this.backToolStripMenuItem.Text = "Background";
+            this.backToolStripMenuItem.Click += new System.EventHandler(this.backToolStripMenuItem_Click);
+            this.backToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openButton,
+            this.saveButton,
+            this.settingsToolStripMenuItem,
+            this.backToolStripMenuItem,
+            this.exitToolStripMenuItem});
             // 
             // exitToolStripMenuItem
             // 
@@ -384,6 +431,10 @@
         private System.Windows.Forms.ToolStripLabel pageLabel;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripDropDownButton colorDropDownButton1;
+        private System.Windows.Forms.ToolStripDropDownButton weightDropDownButton1;
+        private System.Windows.Forms.ToolStripMenuItem thinToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mediumToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem thickToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem blackToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem redToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem greenToolStripMenuItem;
@@ -407,6 +458,7 @@
         private System.Windows.Forms.ToolStripDropDownButton fileButton;
         private DoubleBufferedPanel panel1;
         private System.Windows.Forms.ToolStripMenuItem settingsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem backToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
     }
 }
